@@ -1,0 +1,7 @@
+<h1>All goals!</h1>
+
+<ul>
+    <%@goals.each do |goal| %>
+        <li> <%=goal.body%>, <%=goal.completed%>, <%=goal.visibility%>  </li>
+    <% end %>
+</ul>

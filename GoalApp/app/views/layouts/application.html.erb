@@ -10,6 +10,18 @@
   </head>
 
   <body>
+    <% if logged_in? %>
+        <h3> Welcome to your account on goal app!</h3>
+        
+        <form action="<%=sessions_url%>" method="POST">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+          <input type="hidden" name="_method" value="DELETE">
+          <input type="submit" value="logout">
+        </form>
+    <% else %>
+      <a href="<%=new_sessions_url%>"> Login!</a>
+      <a href="<%=new_user_url%>"> Sign up!</a>
+    <% end %>
     <%= yield %>
   </body>
 </html>

@@ -5,6 +5,9 @@ class User < ApplicationRecord
     attr_reader :password
     validates :password, length: {minimum: 6, allow_nil: true}
 
+    # run after user.new
+    after_initialize :ensure_session_token
+
 
     def self.find_by_credential(username, password)
         user = User.find_by(username: username)
@@ -21,7 +24,7 @@ class User < ApplicationRecord
 
 
     def self.generate_session_token
-        SecureRandom::urlsafe_base64
+        SecureRandom.urlsafe_base64
     end
 
     def password=(password)
@@ -44,8 +47,8 @@ class User < ApplicationRecord
 
     # celll
 
-
-
- 
+    has_many :goals,
+    foreign_key: :user_id,
+    class_name: :Goal
 
 end
